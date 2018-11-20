@@ -1,31 +1,21 @@
 import React from "react";
 
 class Todo extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      check: false
-    };
-  }
-
-  onChangeHandler = () => {
-    this.setState({
-      check: !this.state.check
-    });
-  };
-
   render() {
-    const { text } = this.props;
+    const {
+      value: { value, checked },
+      onCheck
+    } = this.props;
     return (
       <li
         style={{
-          textDecoration: this.state.check ? "line-through" : "none",
+          textDecoration: (checked && "line-through") || "none",
           cursor: "pointer",
           listStyle: "none"
         }}
-        onClick={this.onChangeHandler}
+        onClick={onCheck}
       >
-        {text}
+        {value}
       </li>
     );
   }

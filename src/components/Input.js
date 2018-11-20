@@ -18,8 +18,14 @@ export default class Input extends React.Component {
   onSubmit = () => {
     this.setState({
       value: "",
-      arr: [...this.state.arr, this.state.value]
+      arr: [...this.state.arr, { value: this.state.value, checked: false }]
     });
+  };
+
+  onClicked = index => {
+    const arr = this.state.arr;
+    arr[index].checked = !arr[index].checked;
+    this.setState({ arr });
   };
 
   render() {
@@ -27,7 +33,7 @@ export default class Input extends React.Component {
       <React.Fragment>
         <input type="text" onChange={this.handleChange} value={this.state.value} />
         <button onClick={this.onSubmit}>Add</button>
-        <TodoList todos={this.state.arr} />
+        <TodoList todos={this.state.arr} onCheck={this.onClicked} />
       </React.Fragment>
     );
   }
