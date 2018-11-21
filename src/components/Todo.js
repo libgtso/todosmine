@@ -3,13 +3,13 @@ import React from "react";
 class Todo extends React.Component {
   render() {
     const {
-      value: { value, checked },
+      value: { value, completed },
       onCheck
     } = this.props;
     return (
       <li
         style={{
-          textDecoration: (checked && "line-through") || "none",
+          textDecoration: (completed && "line-through") || "none",
           cursor: "pointer",
           listStyle: "none"
         }}
