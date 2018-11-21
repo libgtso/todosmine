@@ -30,12 +30,12 @@ export default class Input extends React.Component {
   };
 
   onCompleteFilter = todos => {
-    const arr = todos.filter(todo => (todo.completed = todo.completed));
+    const arr = todos.filter(todo => todo.completed);
     this.setState({ arr });
   };
 
   onIncompleteFilter = todos => {
-    const arr = todos.filter(todo => (todo.completed = !todo.completed));
+    const arr = todos.filter(todo => !todo.completed);
     this.setState({ arr });
   };
 
