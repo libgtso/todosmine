@@ -8,7 +8,9 @@ export default class TodoList extends React.Component {
       <React.Fragment>
         <ul>
           {todos.map((todo, index) => {
-            return <Todo value={todo} key={index} onCheck={() => onCheck(index)} />;
+            return (
+              <Todo value={todo} key={index} onCheck={() => onCheck(index)} />
+            );
           })}
         </ul>
       </React.Fragment>

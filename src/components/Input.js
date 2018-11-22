@@ -8,7 +8,8 @@ export default class Input extends React.Component {
 
     this.state = {
       value: "",
-      arr: []
+      arrView: [],
+      arrMemory: []
     };
   }
 
@@ -17,31 +18,41 @@ export default class Input extends React.Component {
   };
 
   onSubmit = () => {
+    const arrView = [
+      ...this.state.arrView,
+      { value: this.state.value, completed: false }
+    ];
     this.setState({
       value: "",
-      arr: [...this.state.arr, { value: this.state.value, completed: false }]
+      arrView,
+      arrMemory: arrView
     });
   };
 
   onClicked = index => {
-    const arr = this.state.arr;
-    arr[index].completed = !arr[index].completed;
-    this.setState({ arr });
+    const arrView = this.state.arrView;
+    arrView[index].completed = !arrView[index].completed;
+    this.setState({ arrView, arrMemory: arrView });
   };
 
-  onCompleteFilter = todos => {
-    const arr = todos.filter(todo => todo.completed);
-    this.setState({ arr });
+  onIncompleteFilter = () => {
+    const arrView = this.state.arrMemory.filter(todo => !todo.completed);
+    this.setState({
+      arrView
+    });
   };
 
-  onIncompleteFilter = todos => {
-    const arr = todos.filter(todo => !todo.completed);
-    this.setState({ arr });
+  onCompleteFilter = () => {
+    const arrView = this.state.arrMemory.filter(todo => todo.completed);
+    this.setState({
+      arrView
+    });
   };
 
-  showAllTodos = todos => {
-    const arr = todos;
-    this.setState({ arr });
+  showAllTodos = () => {
+    this.setState({
+      arrView: this.state.arrMemory
+    });
   };
 
   render() {
@@ -53,12 +64,11 @@ export default class Input extends React.Component {
           value={this.state.value}
         />
         <button onClick={this.onSubmit}>Add</button>
-        <TodoList todos={this.state.arr} onCheck={this.onClicked} />
+        <TodoList todos={this.state.arrView} onCheck={this.onClicked} />
         <Filter
           showAllTodos={this.showAllTodos}
           onIncompleteFilter={this.onIncompleteFilter}
           onCompleteFilter={this.onCompleteFilter}
-          todos={this.state.arr}
         />
       </React.Fragment>
     );
