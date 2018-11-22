@@ -64,12 +64,12 @@ export default class Input extends React.Component {
           value={this.state.value}
         />
         <button onClick={this.onSubmit}>Add</button>
-        <TodoList todos={this.state.arrView} onCheck={this.onClicked} />
         <Filter
           showAllTodos={this.showAllTodos}
           onIncompleteFilter={this.onIncompleteFilter}
           onCompleteFilter={this.onCompleteFilter}
         />
+        <TodoList todos={this.state.arrView} onCheck={this.onClicked} />
       </React.Fragment>
     );
   }
