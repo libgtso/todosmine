@@ -18,13 +18,10 @@ export default class Input extends React.Component {
   };
 
   onSubmit = () => {
-    const arrView = [
-      ...this.state.arrView,
-      { value: this.state.value, completed: false }
-    ];
+    const arrView = [...this.state.arrView, { value: this.state.value, completed: false }];
     this.setState({
       value: "",
-      arrView,
+      arrView: [...this.state.arrView, { value: this.state.value, completed: false }],
       arrMemory: arrView
     });
   };
@@ -38,14 +35,14 @@ export default class Input extends React.Component {
   onIncompleteFilter = () => {
     const arrView = this.state.arrMemory.filter(todo => !todo.completed);
     this.setState({
-      arrView
+      arrView: arrView
     });
   };
 
   onCompleteFilter = () => {
     const arrView = this.state.arrMemory.filter(todo => todo.completed);
     this.setState({
-      arrView
+      arrView: arrView
     });
   };
 
@@ -58,11 +55,7 @@ export default class Input extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <input
-          type="text"
-          onChange={this.handleChange}
-          value={this.state.value}
-        />
+        <input type="text" onChange={this.handleChange} value={this.state.value} />
         <button onClick={this.onSubmit}>Add</button>
         <Filter
           showAllTodos={this.showAllTodos}
